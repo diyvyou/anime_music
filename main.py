@@ -16,4 +16,5 @@ while pygame.mixer.music.get_busy():
     pygame.time.Clock().tick(10)
 
 # 停止pygame
+
 pygame.quit()
