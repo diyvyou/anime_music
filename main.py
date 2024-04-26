@@ -7,7 +7,7 @@ a = spider.get_url()
 pygame.init()
 
 # 播放本地mp3文件
-mp3_path = r'D:\11.mp3'  # 使用原始字符串来避免转义字符的影响
+mp3_path = spider.down_url(a) # 使用原始字符串来避免转义字符的影响
 pygame.mixer.music.load(mp3_path)
 pygame.mixer.music.play()
 
