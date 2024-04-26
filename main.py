@@ -1,20 +1,25 @@
 import pygame
 import spider
 
-a = spider.get_url()
 
-# 初始化pygame
-pygame.init()
+song_datas = spider.get_song()
+song_datalist = spider.get_song_datas(song_datas)
 
-# 播放本地mp3文件
-mp3_path = spider.down_url(a) # 使用原始字符串来避免转义字符的影响
-pygame.mixer.music.load(mp3_path)
-pygame.mixer.music.play()
+# 获取信息
+song_title = song_datalist['song_title']
+song_url = song_datalist['song_url']
+song_path = spider.down_url(song_url,song_title) # 使用原始字符串来避免转义字符的影响
 
-# 等待音乐播放完毕
-while pygame.mixer.music.get_busy():
-    pygame.time.Clock().tick(10)
+#播放器
+def play_song(song_path):
+    pygame.init()
+    print('正在播放：' + song_title)
+    pygame.mixer.music.load(song_path)
+    pygame.mixer.music.play()
 
-# 停止pygame
+    while pygame.mixer.music.get_busy():
+        pygame.time.Clock().tick(10)
 
-pygame.quit()
+    pygame.quit()
+
+play_song(song_path)
