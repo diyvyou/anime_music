@@ -6,7 +6,6 @@ song_data_list = {'msg':0}
 #解析器
 def get_song():
     song_data = spider.get_song_data()
-    print(song_data)
     song_title   = song_data['res']['title']
     song_url     = song_data['res']['play_url']
     return song_title,song_url
