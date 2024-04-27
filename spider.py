@@ -4,6 +4,22 @@ import json
 api_url = "https://anime-music.jijidown.com/api/v2/music"
 headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"}
 
+#爬虫
+def get_song_data():
+    song_data = requests.get(url=api_url,headers=headers)
+    song_data = json.loads(song_data.text)
+    return song_data
+
+#下载器
+def down_url(song_url,song_title):
+    path = "D:\\" + song_title + ".mp3"
+    song = requests.get(song_url)
+    with open(path,'wb') as file:
+        file.write(song.content)
+    print('下载完成')
+    return path
+
+"""
 def get_song():
 
     song_datas = requests.get(url=api_url,headers=headers)
@@ -29,3 +45,4 @@ def get_song_datas(song_datas):
     song_datalist = {"msg":1,"anime_title":anime_title,'anime_bg_url':anime_bg_url,
                   'anime_desc':anime_desc,'song_title':song_title,'song_url':song_url}
     return song_datalist
+"""

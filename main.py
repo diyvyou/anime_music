@@ -1,17 +1,18 @@
 import pygame
 import spider
 
+song_data_list = {'msg':0}
 
-song_datas = spider.get_song()
-song_datalist = spider.get_song_datas(song_datas)
-
-# 获取信息
-song_title = song_datalist['song_title']
-song_url = song_datalist['song_url']
-song_path = spider.down_url(song_url,song_title) # 使用原始字符串来避免转义字符的影响
+#解析器
+def get_song():
+    song_data = spider.get_song_data()
+    print(song_data)
+    song_title   = song_data['res']['title']
+    song_url     = song_data['res']['play_url']
+    return song_title,song_url
 
 #播放器
-def play_song(song_path):
+def play_song(song_path,song_title):
     pygame.init()
     print('正在播放：' + song_title)
     pygame.mixer.music.load(song_path)
@@ -19,7 +20,13 @@ def play_song(song_path):
 
     while pygame.mixer.music.get_busy():
         pygame.time.Clock().tick(10)
-
     pygame.quit()
 
-play_song(song_path)
+
+
+def main():
+    title,url = get_song()
+    path = spider.down_url(url,title)
+    play_song(path,title)
+
+main()
