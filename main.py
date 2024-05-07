@@ -9,8 +9,10 @@ def get_song():
     song_title   = song_data['res']['title']
     song_url     = song_data['res']['play_url']
     anime_title  = song_data['res']['anime_info']['title']
-    #print(song_data)
-    return song_title,song_url,anime_title
+    anime_bg_url = song_data['res']['anime_info']['bg']
+    anime_desc   = song_data['res']['anime_info']['desc']
+
+    return song_title,song_url,anime_title,anime_bg_url,anime_desc
 
 #播放器
 def play_song(song_path,song_title,anime_title):
@@ -27,8 +29,8 @@ def play_song(song_path,song_title,anime_title):
 
 
 def main():
-    title,url,anime_title = get_song()
-    path = spider.down_url(url,title)
-    play_song(path,title,anime_title)
+    song_title,song_url,anime_title,anime_bg_url,anime_desc = get_song()
+    path = spider.down_url(song_url,song_title)
+    play_song(path,song_title,anime_title)
 
 main()
